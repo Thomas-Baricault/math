@@ -21,6 +21,18 @@ namespace tbaricault::math
 {
 
     template<typename T>
+    Vector3<T> Vector3<T>::zero() noexcept
+    {
+        return Vector3(0, 0, 0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::one() noexcept
+    {
+        return Vector3(1, 1, 1);
+    }
+
+    template<typename T>
     Vector3<T> Vector3<T>::left() noexcept
     {
         return Vector3(-1, 0, 0);
