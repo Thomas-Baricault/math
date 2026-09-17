@@ -160,7 +160,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < N; j++)
                 for (std::size_t k = 0; k < C; k++)
-                    result._data[i][j] += this->_data[i][k] + other(k, j);
+                    result._data[i][j] += this->_data[i][k] * other(k, j);
         return (result);
     }
 
@@ -235,7 +235,7 @@ namespace tbaricault::math
     {
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
-                if ((i == j && this->_data[i][j] != 1) || this->_data[i][j] != 0)
+                if ((i == j && this->_data[i][j] != 1) || (i != j && this->_data[i][j] != 0))
                     return (false);
         return (true);
     }
@@ -286,7 +286,7 @@ namespace tbaricault::math
         Matrix<C, R, T> result;
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
-                result[j][i] = this->_data[i][j];
+                result(j, i) = this->_data[i][j];
         return (result);
     }
 
