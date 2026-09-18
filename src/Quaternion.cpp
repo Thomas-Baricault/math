@@ -22,9 +22,9 @@ namespace tbaricault::math
         double cz = cos(roll * 0.5);
         double sz = sin(roll * 0.5);
         return Quaternion(
+            sx * cy * cz - cx * sy * sz,
+            cx * sy * cz + sx * cy * sz,
             cx * cy * sz - sx * sy * cz,
-            sx * cy * cz + cx * sy * sz,
-            cx * sy * cz - sx * cy * sz,
             cx * cy * cz + sx * sy * sz
         );
     }
@@ -71,10 +71,14 @@ namespace tbaricault::math
 
     Quaternion& Quaternion::operator*=(const Quaternion& other) noexcept
     {
-        this->x = this->w * other.x + this->x * other.w + this->y * other.z - this->z * other.y;
-        this->y = this->w * other.y - this->x * other.z + this->y * other.w + this->z * other.x;
-        this->z = this->w * other.z + this->x * other.y - this->y * other.x + this->z * other.w;
-        this->w = this->w * other.w - this->x * other.x - this->y * other.y - this->z * other.z;
+        double x = this->x;
+        double y = this->y;
+        double z = this->z;
+        double w = this->w;
+        this->x = w * other.x + x * other.w + y * other.z - z * other.y;
+        this->y = w * other.y - x * other.z + y * other.w + z * other.x;
+        this->z = w * other.z + x * other.y - y * other.x + z * other.w;
+        this->w = w * other.w - x * other.x - y * other.y - z * other.z;
         return (*this);
     }
 
@@ -101,7 +105,7 @@ namespace tbaricault::math
 
     Quaternion Quaternion::normalize() const noexcept
     {
-        double norm = (
+        double norm = std::sqrt(
             this->x * this->x +
             this->y * this->y +
             this->z * this->z +
