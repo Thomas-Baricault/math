@@ -205,7 +205,7 @@ namespace tbaricault::math
     }
 
     template<std::size_t R, std::size_t C, typename T>
-    T Matrix<R, C, T>::operator()(std::size_t i, std::size_t j) const
+    const T& Matrix<R, C, T>::operator()(std::size_t i, std::size_t j) const
     {
         if (i >= R || j >= C)
             throw std::out_of_range("matrix index out of range");

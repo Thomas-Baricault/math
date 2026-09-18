@@ -251,7 +251,7 @@ namespace tbaricault::math
              * 
              * @throws std::out_of_range If index (i, j) is out of range
              */
-            T operator()(std::size_t i, std::size_t j) const;
+            const T& operator()(std::size_t i, std::size_t j) const;
 
             /**
              * @brief Access element (mutable)
