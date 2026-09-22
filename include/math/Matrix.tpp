@@ -268,7 +268,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result += this->_data[i][j] * this->_data[i][j];
-        return sqrt(result);
+        return (std::sqrt(result));
     }
 
     template<std::size_t R, std::size_t C, typename T>

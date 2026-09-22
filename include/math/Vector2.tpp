@@ -68,16 +68,16 @@ namespace tbaricault::math
     template<typename T>
     double Vector2<T>::distance(const Vector2& a, const Vector2& b) noexcept
     {
-        return sqrt(
+        return (std::sqrt(
             (a.x - b.x) * (a.x - b.x) +
             (a.y - b.y) * (a.y - b.y)
-        );
+        ));
     }
 
     template<typename T>
     double Vector2<T>::angle(const Vector2& a, const Vector2& b) noexcept
     {
-        return acos(a * b / (a.magnitude() * b.magnitude()));
+        return (std::acos(a * b / (a.magnitude() * b.magnitude())));
     }
 
     template<typename T>
@@ -276,10 +276,10 @@ namespace tbaricault::math
     template<typename T>
     double Vector2<T>::magnitude() const noexcept
     {
-        return sqrt(
+        return (std::sqrt(
             this->x * this->x +
             this->y * this->y
-        );
+        ));
     }
 
     template<typename T>
@@ -313,8 +313,8 @@ namespace tbaricault::math
     template<typename T>
     Vector2<T> Vector2<T>::rotate(double angle) const noexcept
     {
-        double c = cos(angle);
-        double s = sin(angle);
+        double c = std::cos(angle);
+        double s = std::sin(angle);
         return Vector2(
             this->x * c - this->y * s,
             this->x * s + this->y * c

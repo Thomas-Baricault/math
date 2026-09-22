@@ -15,12 +15,12 @@ namespace tbaricault::math
 {
     Quaternion Quaternion::fromEulerAngles(double pitch, double yaw, double roll) noexcept
     {
-        double cx = cos(pitch * 0.5);
-        double sx = sin(pitch * 0.5);
-        double cy = cos(yaw * 0.5);
-        double sy = sin(yaw * 0.5);
-        double cz = cos(roll * 0.5);
-        double sz = sin(roll * 0.5);
+        double cx = std::cos(pitch * 0.5);
+        double sx = std::sin(pitch * 0.5);
+        double cy = std::cos(yaw * 0.5);
+        double sy = std::sin(yaw * 0.5);
+        double cz = std::cos(roll * 0.5);
+        double sz = std::sin(roll * 0.5);
         return Quaternion(
             sx * cy * cz - cx * sy * sz,
             cx * sy * cz + sx * cy * sz,
@@ -48,16 +48,16 @@ namespace tbaricault::math
                 a.w + (bb.w - a.w) * t
             ).normalize();
         }
-        double theta = acos(dot);
-        double stheta = sin(theta);
-        double s0 = sin((1.0 - t) * theta) / stheta;
-        double s1 = sin(t * theta) / stheta;
-        return Quaternion(
+        double theta = std::acos(dot);
+        double stheta = std::sin(theta);
+        double s0 = std::sin((1.0 - t) * theta) / stheta;
+        double s1 = std::sin(t * theta) / stheta;
+        return (Quaternion(
             a.x * s0 + bb.x * s1,
             a.y * s0 + bb.y * s1,
             a.z * s0 + bb.z * s1,
             a.w * s0 + bb.w * s1
-        ).normalize();
+        ).normalize());
     }
 
     Quaternion::Quaternion(double x, double y, double z, double w) noexcept

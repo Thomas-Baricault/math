@@ -19,12 +19,12 @@ namespace tbaricault::math
     template<typename T>
     Quaternion Quaternion::fromAxisAngle(const Vector3<T>& axis, double angle) noexcept
     {
-        double s = sin(angle / 2);
+        double s = std::sin(angle / 2);
         return Quaternion(
             axis.x * s,
             axis.y * s,
             axis.z * s,
-            cos(angle / 2)
+            std::cos(angle / 2)
         );
     }
 
