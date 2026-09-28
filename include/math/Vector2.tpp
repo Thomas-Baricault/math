@@ -21,37 +21,37 @@ namespace tbaricault::math
 {
 
     template<typename T>
-    Vector2<T> Vector2<T>::zero() noexcept
+    constexpr Vector2<T> Vector2<T>::zero() noexcept
     {
         return Vector2(0, 0);
     }
 
     template<typename T>
-    Vector2<T> Vector2<T>::one() noexcept
+    constexpr Vector2<T> Vector2<T>::one() noexcept
     {
         return Vector2(1, 1);
     }
 
     template<typename T>
-    Vector2<T> Vector2<T>::left() noexcept
+    constexpr Vector2<T> Vector2<T>::left() noexcept
     {
         return Vector2(-1, 0);
     }
 
     template<typename T>
-    Vector2<T> Vector2<T>::right() noexcept
+    constexpr Vector2<T> Vector2<T>::right() noexcept
     {
         return Vector2(1, 0);
     }
 
     template<typename T>
-    Vector2<T> Vector2<T>::down() noexcept
+    constexpr Vector2<T> Vector2<T>::down() noexcept
     {
         return Vector2(0, -1);
     }
 
     template<typename T>
-    Vector2<T> Vector2<T>::up() noexcept
+    constexpr Vector2<T> Vector2<T>::up() noexcept
     {
         return Vector2(0, 1);
     }

@@ -14,364 +14,398 @@
 #include <tbaricault/str.hpp>
 #include <tbaricault/uniconvert.hpp>
 
-#include "Vector3.hpp"
+#include "Vector4.hpp"
 
 
 namespace tbaricault::math
 {
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::zero() noexcept
+    constexpr Vector4<T> Vector4<T>::zero() noexcept
     {
-        return Vector3(0, 0, 0);
+        return Vector4(0, 0, 0, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::one() noexcept
+    constexpr Vector4<T> Vector4<T>::one() noexcept
     {
-        return Vector3(1, 1, 1);
+        return Vector4(1, 1, 1, 1);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::left() noexcept
+    constexpr Vector4<T> Vector4<T>::left() noexcept
     {
-        return Vector3(-1, 0, 0);
+        return Vector4(-1, 0, 0, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::right() noexcept
+    constexpr Vector4<T> Vector4<T>::right() noexcept
     {
-        return Vector3(1, 0, 0);
+        return Vector4(1, 0, 0, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::down() noexcept
+    constexpr Vector4<T> Vector4<T>::down() noexcept
     {
-        return Vector3(0, -1, 0);
+        return Vector4(0, -1, 0, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::up() noexcept
+    constexpr Vector4<T> Vector4<T>::up() noexcept
     {
-        return Vector3(0, 1, 0);
+        return Vector4(0, 1, 0, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::backward() noexcept
+    constexpr Vector4<T> Vector4<T>::backward() noexcept
     {
-        return Vector3(0, 0, -1);
+        return Vector4(0, 0, -1, 0);
     }
 
     template<typename T>
-    constexpr Vector3<T> Vector3<T>::forward() noexcept
+    constexpr Vector4<T> Vector4<T>::forward() noexcept
     {
-        return Vector3(0, 0, 1);
+        return Vector4(0, 0, 1, 0);
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::hadamard(const Vector3& a, const Vector3& b) noexcept
+    constexpr Vector4<T> Vector4<T>::kata() noexcept
     {
-        return Vector3(
+        return Vector4(0, 0, 0, -1);
+    }
+
+    template<typename T>
+    constexpr Vector4<T> Vector4<T>::ana() noexcept
+    {
+        return Vector4(0, 0, 0, 1);
+    }
+
+    template<typename T>
+    Vector4<T> Vector4<T>::hadamard(const Vector4& a, const Vector4& b) noexcept
+    {
+        return Vector4(
             a.x * b.x,
             a.y * b.y,
-            a.z * b.z
+            a.z * b.z,
+            a.w * b.w
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::cross(const Vector3& a, const Vector3& b) noexcept
-    {
-        return Vector3(
-            a.y * b.z - a.z * b.y,
-            a.z * b.x - a.x * b.z,
-            a.x * b.y - a.y * b.x
-        );
-    }
-
-    template<typename T>
-    double Vector3<T>::distance(const Vector3& a, const Vector3& b) noexcept
+    double Vector4<T>::distance(const Vector4& a, const Vector4& b) noexcept
     {
         return (std::sqrt(
             (a.x - b.x) * (a.x - b.x) +
             (a.y - b.y) * (a.y - b.y) +
-            (a.z - b.z) * (a.z - b.z)
+            (a.z - b.z) * (a.z - b.z) +
+            (a.w - b.w) * (a.w - b.w)
         ));
     }
 
     template<typename T>
-    double Vector3<T>::angle(const Vector3& a, const Vector3& b) noexcept
+    double Vector4<T>::angle(const Vector4& a, const Vector4& b) noexcept
     {
         return (std::acos(a * b / (a.magnitude() * b.magnitude())));
     }
 
     template<typename T>
-    Vector3<T>::Vector3(T value) noexcept
+    Vector4<T>::Vector4(T value) noexcept
         : x(value)
         , y(value)
         , z(value)
+        , w(value)
     {
         return;
     }
 
     template<typename T>
-    Vector3<T>::Vector3(T x, T y, T z) noexcept
+    Vector4<T>::Vector4(T x, T y, T z, T w) noexcept
         : x(x)
         , y(y)
         , z(z)
+        , w(w)
     {
         return;
     }
 
     template<typename T>
-    Vector3<T>::Vector3(const Vector2<T>& v, T z) noexcept
+    Vector4<T>::Vector4(const Vector2<T>& v, T z, T w) noexcept
         : x(v.x)
         , y(v.y)
         , z(z)
+        , w(w)
+    {
+        return;
+    }
+
+    template<typename T>
+    Vector4<T>::Vector4(const Vector3<T>& v, T w) noexcept
+        : x(v.x)
+        , y(v.y)
+        , z(v.z)
+        , w(w)
     {
         return;
     }
 
     template<typename T>
     template<typename U>
-    Vector3<T>::Vector3(const Vector3<U>& other)
+    Vector4<T>::Vector4(const Vector4<U>& other)
         : x(static_cast<T>(other.x))
         , y(static_cast<T>(other.y))
         , z(static_cast<T>(other.z))
+        , w(static_cast<T>(other.w))
     {
         return;
     }
 
     template<typename T>
-    Vector3<T>::Vector3(std::string_view str)
+    Vector4<T>::Vector4(std::string_view str)
     {
         std::vector<std::string> args = tbaricault::str::split(str, " ", false);
-        if (args.size() == 3)
+        if (args.size() == 4)
         {
             this->x = tbaricault::uniconvert::convert<std::string, T>(args.at(0));
             this->y = tbaricault::uniconvert::convert<std::string, T>(args.at(1));
             this->z = tbaricault::uniconvert::convert<std::string, T>(args.at(2));
+            this->w = tbaricault::uniconvert::convert<std::string, T>(args.at(3));
         }
         throw std::invalid_argument("convertion failed");
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator+=(const Vector3& other) noexcept
+    Vector4<T>& Vector4<T>::operator+=(const Vector4& other) noexcept
     {
         this->x += other.x;
         this->y += other.y;
         this->z += other.z;
+        this->w += other.w;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator+=(T other) noexcept
+    Vector4<T>& Vector4<T>::operator+=(T other) noexcept
     {
         this->x += other;
         this->y += other;
         this->z += other;
+        this->w += other;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator-=(const Vector3& other) noexcept
+    Vector4<T>& Vector4<T>::operator-=(const Vector4& other) noexcept
     {
         this->x -= other.x;
         this->y -= other.y;
         this->z -= other.z;
+        this->w -= other.w;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator-=(T other) noexcept
+    Vector4<T>& Vector4<T>::operator-=(T other) noexcept
     {
         this->x -= other;
         this->y -= other;
         this->z -= other;
+        this->w -= other;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator*=(T other) noexcept
+    Vector4<T>& Vector4<T>::operator*=(T other) noexcept
     {
         this->x *= other;
         this->y *= other;
         this->z *= other;
+        this->w *= other;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T>& Vector3<T>::operator/=(T other) noexcept
+    Vector4<T>& Vector4<T>::operator/=(T other) noexcept
     {
         this->x /= other;
         this->y /= other;
         this->z /= other;
+        this->w /= other;
         return (*this);
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator+(const Vector3& other) const noexcept
+    Vector4<T> Vector4<T>::operator+(const Vector4& other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x + other.x,
             this->y + other.y,
-            this->z + other.z
+            this->z + other.z,
+            this->w + other.w
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator+(T other) const noexcept
+    Vector4<T> Vector4<T>::operator+(T other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x + other,
             this->y + other,
-            this->z + other
+            this->z + other,
+            this->w + other
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator-(const Vector3& other) const noexcept
+    Vector4<T> Vector4<T>::operator-(const Vector4& other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x - other.x,
             this->y - other.y,
-            this->z - other.z
+            this->z - other.z,
+            this->w - other.w
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator-(T other) const noexcept
+    Vector4<T> Vector4<T>::operator-(T other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x - other,
             this->y - other,
-            this->z - other
+            this->z - other,
+            this->w - other
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator-() const noexcept
+    Vector4<T> Vector4<T>::operator-() const noexcept
     {
-        return Vector3(
+        return Vector4(
             -this->x,
             -this->y,
-            -this->z
+            -this->z,
+            -this->w
         );
     }
 
     template<typename T>
-    T Vector3<T>::operator*(const Vector3& other) const noexcept
+    T Vector4<T>::operator*(const Vector4& other) const noexcept
     {
         return (
             this->x * other.x +
             this->y * other.y +
-            this->z * other.z
+            this->z * other.z +
+            this->w * other.w
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator*(T other) const noexcept
+    Vector4<T> Vector4<T>::operator*(T other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x * other,
             this->y * other,
-            this->z * other
+            this->z * other,
+            this->w * other
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator/(T other) const noexcept
+    Vector4<T> Vector4<T>::operator/(T other) const noexcept
     {
-        return Vector3(
+        return Vector4(
             this->x / other,
             this->y / other,
-            this->z / other
+            this->z / other,
+            this->w / other
         );
     }
 
     template<typename T>
-    bool Vector3<T>::operator==(const Vector3& other) const noexcept
+    bool Vector4<T>::operator==(const Vector4& other) const noexcept
     {
         return (
             other.x == this->x &&
             other.y == this->y &&
-            other.z == this->z
+            other.z == this->z &&
+            other.w == this->w
         );
     }
 
     template<typename T>
-    bool Vector3<T>::operator!=(const Vector3& other) const noexcept
+    bool Vector4<T>::operator!=(const Vector4& other) const noexcept
     {
         return (
             other.x != this->x ||
             other.y != this->y ||
-            other.z != this->z
+            other.z != this->z ||
+            other.w != this->w
         );
     }
 
     template<typename T>
-    Vector3<T>::operator std::string() const
+    Vector4<T>::operator std::string() const
     {
         return (
             tbaricault::uniconvert::convert<T, std::string>(this->x) + ' ' +
             tbaricault::uniconvert::convert<T, std::string>(this->y) + ' ' +
-            tbaricault::uniconvert::convert<T, std::string>(this->z)
+            tbaricault::uniconvert::convert<T, std::string>(this->z) + ' ' +
+            tbaricault::uniconvert::convert<T, std::string>(this->w)
         );
     }
 
     template<typename T>
-    bool Vector3<T>::isZero() const noexcept
+    bool Vector4<T>::isZero() const noexcept
     {
         return (
             this->x == 0 &&
             this->y == 0 &&
-            this->z == 0
+            this->z == 0 &&
+            this->w == 0
         );
     }
 
     template<typename T>
-    double Vector3<T>::magnitude() const noexcept
+    double Vector4<T>::magnitude() const noexcept
     {
         return std::sqrt(
             this->x * this->x +
             this->y * this->y +
-            this->z * this->z
+            this->z * this->z +
+            this->w * this->w
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::normalize() const noexcept
+    Vector4<T> Vector4<T>::normalize() const noexcept
     {
         double magnitude = this->magnitude();
         return (
             magnitude == 0
-            ? Vector3(1, 0, 0)
-            : Vector3(
+            ? Vector4(1, 0, 0, 0)
+            : Vector4(
                 this->x / magnitude,
                 this->y / magnitude,
-                this->z / magnitude
+                this->z / magnitude,
+                this->w / magnitude
             )
         );
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::limit(T limit) const noexcept
+    Vector4<T> Vector4<T>::limit(T limit) const noexcept
     {
         double magnitude = this->magnitude();
         return (
             magnitude > limit
-            ? Vector3(
+            ? Vector4(
                 this->x / magnitude * limit,
                 this->y / magnitude * limit,
-                this->z / magnitude * limit
+                this->z / magnitude * limit,
+                this->w / magnitude * limit
             )
             : *this
         );
-    }
-
-    template<typename T>
-    Vector3<T> Vector3<T>::project(const Vector3& other) const noexcept
-    {
-        return (other * ((*this) * other) / (other * other));
     }
 
 }

@@ -49,56 +49,56 @@ namespace tbaricault::math
              * 
              * @return (0, 0, 0)
              */
-            static Vector3 zero() noexcept;
+            static constexpr Vector3 zero() noexcept;
 
             /**
              * @brief Returns a vector whose components are all equal to one
              * 
              * @return (1, 1, 1)
              */
-            static Vector3 one() noexcept;
+            static constexpr Vector3 one() noexcept;
 
             /**
              * @brief Returns the unit vector pointing left
              * 
              * @return (-1, 0, 0)
              */
-            static Vector3 left() noexcept;
+            static constexpr Vector3 left() noexcept;
 
             /**
              * @brief Returns the unit vector pointing right
              * 
              * @return (1, 0, 0)
              */
-            static Vector3 right() noexcept;
+            static constexpr Vector3 right() noexcept;
 
             /**
              * @brief Returns the unit vector pointing downward
              * 
              * @return (0, -1, 0)
              */
-            static Vector3 down() noexcept;
+            static constexpr Vector3 down() noexcept;
 
             /**
              * @brief Returns the unit vector pointing upward
              * 
              * @return (0, 1, 0)
              */
-            static Vector3 up() noexcept;
+            static constexpr Vector3 up() noexcept;
 
             /**
              * @brief Returns the unit vector pointing backwards
              * 
              * @return (0, 0, -1)
              */
-            static Vector3 backward() noexcept;
+            static constexpr Vector3 backward() noexcept;
 
             /**
              * @brief Returns the unit vector pointing forward
              * 
              * @return (0, 0, 1)
              */
-            static Vector3 forward() noexcept;
+            static constexpr Vector3 forward() noexcept;
 
             /**
              * @brief Computes the Hadamard (element-wise) product of two vectors
@@ -180,7 +180,7 @@ namespace tbaricault::math
             Vector3(T x, T y, T z) noexcept;
 
             /**
-             * @brief Constructs a three-dimensional vector expanding a @ref Vector2
+             * @brief Constructs a three-dimensional vector expanding a two-dimentional vector
              * 
              * @param v Vector to expand
              * @param z Z component
@@ -188,7 +188,7 @@ namespace tbaricault::math
             Vector3(const Vector2<T>& v, T z) noexcept;
 
             /**
-             * @brief Constructs a vector by converting another @ref Vector3
+             * @brief Constructs a vector by converting another three-dimentional vector
              *
              * @tparam U Source component type
              * 
