@@ -185,7 +185,7 @@ namespace tbaricault::math
              * @param v Vector to expand
              * @param z Z component
              */
-            Vector3(const Vector2<T>& v, T z) noexcept;
+            Vector3(const Vector2<T>& v, T z = 0) noexcept;
 
             /**
              * @brief Constructs a vector by converting another three-dimentional vector

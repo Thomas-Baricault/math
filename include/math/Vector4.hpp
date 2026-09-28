@@ -193,7 +193,7 @@ namespace tbaricault::math
              * @param z Z component
              * @param w W component
              */
-            Vector4(const Vector2<T>& v, T z, T w) noexcept;
+            Vector4(const Vector2<T>& v, T z = 0, T w = 0) noexcept;
 
             /**
              * @brief Constructs a four-dimensional vector expanding a three-dimentional vector
@@ -201,7 +201,7 @@ namespace tbaricault::math
              * @param v Vector to expand
              * @param w W component
              */
-            Vector4(const Vector3<T>& v, T w) noexcept;
+            Vector4(const Vector3<T>& v, T w = 0) noexcept;
 
             /**
              * @brief Constructs a vector by converting another four-dimentional vector
