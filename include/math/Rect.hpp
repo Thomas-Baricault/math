@@ -119,6 +119,16 @@ namespace tbaricault::math
             Rect(const Vector2<T>&, const Vector2<T>&) noexcept;
 
             /**
+             * @brief Constructs a rectangle by converting another rectangle
+             *
+             * @tparam U Source component type
+             * 
+             * @param other Rectangle to convert
+             */
+            template<typename U>
+            Rect(const Rect<U>& other);
+
+            /**
              * @brief Constructs a rectangle from its string representation
              * 
              * @param str String representation

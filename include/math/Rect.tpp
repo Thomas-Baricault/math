@@ -73,6 +73,17 @@ namespace tbaricault::math
     }
 
     template<typename T>
+    template<typename U>
+    Rect<T>::Rect(const Rect<U>& other)
+        : x(static_cast<T>(other.x))
+        , y(static_cast<T>(other.y))
+        , w(static_cast<T>(other.w))
+        , h(static_cast<T>(other.h))
+    {
+        return;
+    }
+
+    template<typename T>
     Rect<T>::Rect(std::string_view str)
     {
         std::vector<std::string> args = tbaricault::str::split(str, " ", false);
