@@ -170,7 +170,9 @@ namespace tbaricault::math
             this->z = tbaricault::uniconvert::convert<std::string, T>(args.at(2));
             this->w = tbaricault::uniconvert::convert<std::string, T>(args.at(3));
         }
-        throw std::invalid_argument("convertion failed");
+        else
+            throw std::invalid_argument("convertion failed");
+        return;
     }
 
     template<typename T>

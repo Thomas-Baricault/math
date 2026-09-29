@@ -151,7 +151,9 @@ namespace tbaricault::math
             this->y = tbaricault::uniconvert::convert<std::string, T>(args.at(1));
             this->z = tbaricault::uniconvert::convert<std::string, T>(args.at(2));
         }
-        throw std::invalid_argument("convertion failed");
+        else
+            throw std::invalid_argument("convertion failed");
+        return;
     }
 
     template<typename T>
