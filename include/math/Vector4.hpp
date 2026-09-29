@@ -427,4 +427,4 @@ namespace tbaricault::math
 }
 
 
-#include "Vector3.tpp"
+#include "Vector4.tpp"
