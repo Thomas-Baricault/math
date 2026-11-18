@@ -68,16 +68,16 @@ namespace tbaricault::math
     template<typename T>
     double Vector2<T>::distance(const Vector2& a, const Vector2& b) noexcept
     {
-        return (std::sqrt(
+        return std::sqrt(
             (a.x - b.x) * (a.x - b.x) +
             (a.y - b.y) * (a.y - b.y)
-        ));
+        );
     }
 
     template<typename T>
     double Vector2<T>::angle(const Vector2& a, const Vector2& b) noexcept
     {
-        return (std::acos(a * b / (a.magnitude() * b.magnitude())));
+        return std::acos(a * b / (a.magnitude() * b.magnitude()));
     }
 
     template<typename T>
@@ -124,7 +124,7 @@ namespace tbaricault::math
     {
         this->x += other.x;
         this->y += other.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -132,7 +132,7 @@ namespace tbaricault::math
     {
         this->x += other;
         this->y += other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -140,7 +140,7 @@ namespace tbaricault::math
     {
         this->x -= other.x;
         this->y -= other.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -148,7 +148,7 @@ namespace tbaricault::math
     {
         this->x -= other;
         this->y -= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -156,7 +156,7 @@ namespace tbaricault::math
     {
         this->x *= other;
         this->y *= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -164,7 +164,7 @@ namespace tbaricault::math
     {
         this->x /= other;
         this->y /= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -278,38 +278,34 @@ namespace tbaricault::math
     template<typename T>
     double Vector2<T>::magnitude() const noexcept
     {
-        return (std::sqrt(
+        return std::sqrt(
             this->x * this->x +
             this->y * this->y
-        ));
+        );
     }
 
     template<typename T>
     Vector2<T> Vector2<T>::normalize() const noexcept
     {
         double magnitude = this->magnitude();
-        return (
-            magnitude == 0
-                ? Vector2::zero()
-                : Vector2(
-                    this->x / magnitude,
-                    this->y / magnitude
-                )
-        );
+        return magnitude == 0
+            ? Vector2::zero()
+            : Vector2(
+                this->x / magnitude,
+                this->y / magnitude
+            );
     }
 
     template<typename T>
     Vector2<T> Vector2<T>::limit(T limit) const noexcept
     {
         double magnitude = this->magnitude();
-        return (
-            magnitude > limit
-                ? Vector2(
-                    this->x / magnitude * limit,
-                    this->y / magnitude * limit
-                )
-                : *this
-        );
+        return magnitude > limit
+            ? Vector2(
+                this->x / magnitude * limit,
+                this->y / magnitude * limit
+            )
+            : *this;
     }
 
     template<typename T>
@@ -326,7 +322,7 @@ namespace tbaricault::math
     template<typename T>
     Vector2<T> Vector2<T>::project(const Vector2& other) const noexcept
     {
-        return (other * ((*this) * other) / (other * other));
+        return other * ((*this) * other) / (other * other);
     }
 
 }

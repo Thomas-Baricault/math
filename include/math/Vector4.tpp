@@ -94,18 +94,18 @@ namespace tbaricault::math
     template<typename T>
     double Vector4<T>::distance(const Vector4& a, const Vector4& b) noexcept
     {
-        return (std::sqrt(
+        return std::sqrt(
             (a.x - b.x) * (a.x - b.x) +
             (a.y - b.y) * (a.y - b.y) +
             (a.z - b.z) * (a.z - b.z) +
             (a.w - b.w) * (a.w - b.w)
-        ));
+        );
     }
 
     template<typename T>
     double Vector4<T>::angle(const Vector4& a, const Vector4& b) noexcept
     {
-        return (std::acos(a * b / (a.magnitude() * b.magnitude())));
+        return std::acos(a * b / (a.magnitude() * b.magnitude()));
     }
 
     template<typename T>
@@ -182,7 +182,7 @@ namespace tbaricault::math
         this->y += other.y;
         this->z += other.z;
         this->w += other.w;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -192,7 +192,7 @@ namespace tbaricault::math
         this->y += other;
         this->z += other;
         this->w += other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -202,7 +202,7 @@ namespace tbaricault::math
         this->y -= other.y;
         this->z -= other.z;
         this->w -= other.w;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -212,7 +212,7 @@ namespace tbaricault::math
         this->y -= other;
         this->z -= other;
         this->w -= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -222,7 +222,7 @@ namespace tbaricault::math
         this->y *= other;
         this->z *= other;
         this->w *= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -232,7 +232,7 @@ namespace tbaricault::math
         this->y /= other;
         this->z /= other;
         this->w /= other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -382,32 +382,28 @@ namespace tbaricault::math
     Vector4<T> Vector4<T>::normalize() const noexcept
     {
         double magnitude = this->magnitude();
-        return (
-            magnitude == 0
+        return magnitude == 0
             ? Vector4(1, 0, 0, 0)
             : Vector4(
                 this->x / magnitude,
                 this->y / magnitude,
                 this->z / magnitude,
                 this->w / magnitude
-            )
-        );
+            );
     }
 
     template<typename T>
     Vector4<T> Vector4<T>::limit(T limit) const noexcept
     {
         double magnitude = this->magnitude();
-        return (
-            magnitude > limit
+        return magnitude > limit
             ? Vector4(
                 this->x / magnitude * limit,
                 this->y / magnitude * limit,
                 this->z / magnitude * limit,
                 this->w / magnitude * limit
             )
-            : *this
-        );
+            : *this;
     }
 
 }

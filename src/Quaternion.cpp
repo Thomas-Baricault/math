@@ -52,12 +52,12 @@ namespace tbaricault::math
         double stheta = std::sin(theta);
         double s0 = std::sin((1.0 - t) * theta) / stheta;
         double s1 = std::sin(t * theta) / stheta;
-        return (Quaternion(
+        return Quaternion(
             a.x * s0 + bb.x * s1,
             a.y * s0 + bb.y * s1,
             a.z * s0 + bb.z * s1,
             a.w * s0 + bb.w * s1
-        ).normalize());
+        ).normalize();
     }
 
     Quaternion::Quaternion(double x, double y, double z, double w) noexcept
@@ -79,7 +79,7 @@ namespace tbaricault::math
         this->y = w * other.y - x * other.z + y * other.w + z * other.x;
         this->z = w * other.z + x * other.y - y * other.x + z * other.w;
         this->w = w * other.w - x * other.x - y * other.y - z * other.z;
-        return (*this);
+        return *this;
     }
 
     Quaternion Quaternion::operator*(const Quaternion& other) const noexcept
@@ -111,15 +111,13 @@ namespace tbaricault::math
             this->z * this->z +
             this->w * this->w
         );
-        return (
-            norm == 0
+        return norm == 0
             ? Quaternion()
             : Quaternion(
                 this->x / norm,
                 this->y / norm,
                 this->z / norm,
                 this->w / norm
-            )
-        );
+            );
     }
 }

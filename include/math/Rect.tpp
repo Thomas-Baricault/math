@@ -117,38 +117,38 @@ namespace tbaricault::math
     Rect<T>& Rect<T>::operator|=(const Rect& other) noexcept
     {
         *this = *this | other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
     Rect<T>& Rect<T>::operator&=(const Rect& other) noexcept
     {
         *this = *this & other;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
     Rect<T> Rect<T>::operator|(const Rect& other) const noexcept
     {
         if (this->area() == T{})
-            return (other);
+            return other;
         if (other.area() == T{})
-            return (*this);
+            return *this;
         Rect rect(std::min(this->x, other.x), std::min(this->y, other.y), 0, 0);
         rect.w = std::max(this->x + this->w, other.x + other.w) - rect.x;
         rect.h = std::max(this->y + this->h, other.y + other.h) - rect.y;
-        return (rect);
+        return rect;
     }
 
     template<typename T>
     Rect<T> Rect<T>::operator&(const Rect& other) const noexcept
     {
         if (!this->intersects(other))
-            return (Rect());
+            return Rect();
         Rect rect(std::max(this->x, other.x), std::max(this->y, other.y), 0, 0);
         rect.w = std::min(this->x + this->w, other.x + other.w) - rect.x;
         rect.h = std::min(this->y + this->h, other.y + other.h) - rect.y;
-        return (rect);
+        return rect;
     }
 
     template<typename T>
@@ -177,7 +177,7 @@ namespace tbaricault::math
     Rect<T>::operator std::string() const
     {
         if (Rect::allowOneComponent && this->x == this->y && this->x == this->w && this->x == this->h)
-            return (tbaricault::uniconvert::convert<T, std::string>(this->x));
+            return tbaricault::uniconvert::convert<T, std::string>(this->x);
         if (Rect::allowTwoComponents && this->x == this->w && this->y == this->h)
         {
             return (
@@ -225,7 +225,7 @@ namespace tbaricault::math
     template<typename T>
     T Rect<T>::area() const noexcept
     {
-        return (this->w * this->h);
+        return this->w * this->h;
     }
 
     template<typename T>
@@ -269,7 +269,7 @@ namespace tbaricault::math
     {
         this->x = pos.x;
         this->y = pos.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -277,7 +277,7 @@ namespace tbaricault::math
     {
         this->x += offset.x;
         this->y += offset.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -296,7 +296,7 @@ namespace tbaricault::math
     {
         this->w = size.x;
         this->h = size.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>
@@ -304,7 +304,7 @@ namespace tbaricault::math
     {
         this->w += size.x;
         this->h += size.y;
-        return (*this);
+        return *this;
     }
 
     template<typename T>

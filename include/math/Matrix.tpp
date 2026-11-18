@@ -23,7 +23,7 @@ namespace tbaricault::math
         Matrix result;
         for (std::size_t i = 0; i < R; i++)
             result._data[i][i] = 1;
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -33,7 +33,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = a._data[i][j] * b._data[i][j];
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -65,7 +65,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] += other._data[i][j];
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -74,7 +74,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] += other;
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -83,7 +83,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] -= other._data[i][j];
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -92,7 +92,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] -= other;
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -101,7 +101,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] *= other;
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -110,7 +110,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 this->_data[i][j] /= other;
-        return (*this);
+        return *this;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -120,7 +120,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] + other._data[i][j];
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -130,7 +130,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] + other;
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -140,7 +140,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] - other._data[i][j];
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -150,7 +150,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] - other;
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -162,7 +162,7 @@ namespace tbaricault::math
             for (std::size_t j = 0; j < N; j++)
                 for (std::size_t k = 0; k < C; k++)
                     result._data[i][j] += this->_data[i][k] * other(k, j);
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -172,7 +172,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] * other;
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -182,7 +182,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result._data[i][j] = this->_data[i][j] / other;
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -191,8 +191,8 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 if (this->_data[i][j] != other._data[i][j])
-                    return (false);
-        return (true);
+                    return false;
+        return true;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -201,8 +201,8 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 if (this->_data[i][j] == other._data[i][j])
-                    return (false);
-        return (true);
+                    return false;
+        return true;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -210,7 +210,7 @@ namespace tbaricault::math
     {
         if (i >= R || j >= C)
             throw std::out_of_range("matrix index out of range");
-        return (this->_data[i][j]);
+        return this->_data[i][j];
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -218,7 +218,7 @@ namespace tbaricault::math
     {
         if (i >= R || j >= C)
             throw std::out_of_range("matrix index out of range");
-        return (this->_data[i][j]);
+        return this->_data[i][j];
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -227,8 +227,8 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 if (this->_data[i][j] != 0)
-                    return (false);
-        return (true);
+                    return false;
+        return true;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -237,20 +237,20 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 if ((i == j && this->_data[i][j] != 1) || (i != j && this->_data[i][j] != 0))
-                    return (false);
-        return (true);
+                    return false;
+        return true;
     }
 
     template<std::size_t R, std::size_t C, typename T>
     std::size_t Matrix<R, C, T>::rows() const noexcept
     {
-        return (R);
+        return R;
     }
 
     template<std::size_t R, std::size_t C, typename T>
     std::size_t Matrix<R, C, T>::columns() const noexcept
     {
-        return (C);
+        return C;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -259,7 +259,7 @@ namespace tbaricault::math
         T result = T{};
         for (std::size_t i = 0; i < R; i++)
             result += this->_data[i][i];
-        return (result);
+        return result;
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -269,7 +269,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result += this->_data[i][j] * this->_data[i][j];
-        return (std::sqrt(result));
+        return std::sqrt(result);
     }
 
     template<std::size_t R, std::size_t C, typename T>
@@ -288,7 +288,7 @@ namespace tbaricault::math
         for (std::size_t i = 0; i < R; i++)
             for (std::size_t j = 0; j < C; j++)
                 result(j, i) = this->_data[i][j];
-        return (result);
+        return result;
     }
 
 }
